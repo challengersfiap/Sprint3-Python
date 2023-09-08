@@ -2,6 +2,7 @@
 # conceitos aprendidos: Funções/Procedimentos, passagem de parâmetros e retorno de funções / Manipulação de estruturas de 
 # dados: Listas, Tuplas, Dicionários, Tabelas (listas + dicionários).
 import os
+import datetime
 
 def separador(n, cor):
     limpa = '\033[0m'
@@ -67,8 +68,20 @@ def formatarData(data):
     while len(data) > 8 or len(data) < 8:
         print(separador("Erro!", 6), end="")
         data = input(" Quantidades de caracteres diferente de 8!\nData de nascimento dd/mm/aaaa: ").replace("/", "").replace(" ", "")
+    while True:
+        data_atual = datetime.date.today()
+        data_nascimento = datetime.date(int(data[4:]), int(data[2:4]), int(data[:2]))
+        mes_nascimento = int(data[2:4])
+        dia_nascimento = int(data[:2])
+        idade = data_atual.year - data_nascimento.year - ((data_atual.month, data_atual.day) < mes_nascimento, dia_nascimento)
+        while idade < 18 and idade > 100:
+            if idade < 18:
+                print(separador("Você é menor de idade!", 6))
+                data = input("Data de nascimento: ")
     
-    return f'{data[:2]}/{data[2:4]}/{data[4:]}'
+
+    # return f'{data[:2]}/{data[2:4]}/{data[4:]}'
+
 
 
 #Programa principal

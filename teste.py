@@ -1,3 +1,5 @@
+import datetime
+
 def separador(n, cor):
     limpa = '\033[0m'
     cores = {
@@ -30,3 +32,8 @@ def separador(n, cor):
     return mensagem
 
 print(separador(16, 1))
+
+atual = datetime.date.today()
+print(atual)
+print(atual.year)
+print(atual.strftime("%A"))
