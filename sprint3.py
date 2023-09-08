@@ -65,20 +65,25 @@ def formatarCpf(cpf):
     return f'{cpf[:3]}.{cpf[3:6]}.{cpf[6:9]}-{cpf[9:]}'
 
 def formatarData(data):
-    while len(data) > 8 or len(data) < 8:
-        print(separador("Erro!", 6), end="")
-        data = input(" Quantidades de caracteres diferente de 8!\nData de nascimento dd/mm/aaaa: ").replace("/", "").replace(" ", "")
     while True:
+        if len(data) != 8:
+            print(separador("Erro!", 6), end="")
+            data = input(" Quantidades de caracteres diferente de 8!\nData de nascimento dd/mm/aaaa: ").replace("/", "").replace(" ", "")
+            continue 
         data_atual = datetime.date.today()
         data_nascimento = datetime.date(int(data[4:]), int(data[2:4]), int(data[:2]))
         mes_nascimento = int(data[2:4])
         dia_nascimento = int(data[:2])
         idade = data_atual.year - data_nascimento.year - ((data_atual.month, data_atual.day) < mes_nascimento, dia_nascimento)
-        while idade < 18 and idade > 100:
+        while idade < 18 or idade > 100:
             if idade < 18:
                 print(separador("Você é menor de idade!", 6))
                 data = input("Data de nascimento: ")
-    
+            elif idade > 100:
+                print(separador("Você tem mais de 100 anos!", 6))
+                data = input("Data de nascimento: ")
+        if 18 <= idade <=100:
+            break
 
     # return f'{data[:2]}/{data[2:4]}/{data[4:]}'
 
