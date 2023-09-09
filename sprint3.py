@@ -50,10 +50,27 @@ def clear_console():
 def validacao(v, tipo, nome, cpf_formatado, dt_nasc_formatada, tel_fixo, tel_celular, email):
     if tipo == 1:
         while v not in ["1", "2", "3", "4", "5", "6"]:
+            clear_console()
+            print(separador(33, 1))
+            print(separador("Opção inválida!", 6))
             print(f"1- Nome: {nome}\n2- CPF: {cpf_formatado}\n3- Data de nascimento: {dt_nasc_formatada}\n4- Telefone fixo: {tel_fixo}\n5- Telefone celular: {tel_celular}\n6- Email: {email}")
+            print(separador(33, 1))
             v = input("Se todas informações estiverem corretas digite 0\nSe não digite o número que deseja mudar: ")
-
         return v
+
+    elif tipo == 2:
+        while v not in ["1", "2", "3"]:
+            clear_console()
+            print(separador(33, 1))
+            print(separador("Opção inválida!", 6))
+            v = input("1- Fazer seguro de bike!\n2- Saber informações do seguro\n3- Sair").strip()        
+        return v
+
+def menuPrincipal():
+    print(separador(33, 4))
+    option = input("1- Fazer seguro de bike!\n2- Saber informações do seguro\n3- Sair").strip()
+    option = validacao()
+    return option
 
 def cadastroCliente():
     clear_console()
@@ -76,6 +93,7 @@ def cadastroCliente():
     print(separador(33, 1))
 
     mudanca = input("Se todas informações estiverem corretas digite 0\nSe não digite o número que deseja mudar: ")
+    validacao(mudanca, 1, nome, cpf_formatado, dt_nasc_formatada, tel_fixo, tel_celular, email)
     while mudanca != "0":
         if mudanca == "1":
             nome = input("Nome: ").strip().title()
@@ -101,6 +119,7 @@ def cadastroCliente():
         print(f"1- Nome: {nome}\n2- CPF: {cpf_formatado}\n3- Data de nascimento: {dt_nasc_formatada}\n4- Telefone fixo: {tel_fixo}\n5- Telefone celular: {tel_celular}\n6- Email: {email}")
         print(separador(33, 1))
         mudanca = input("Se todas informações estiverem corretas digite 0\nSe não digite o número que deseja mudar: ")
+        validacao(mudanca, 1, nome, cpf_formatado, dt_nasc_formatada, tel_fixo, tel_celular, email)
 
     print("Validando dados", end="")
     for c in range(3):
@@ -148,10 +167,41 @@ def bike():
     clear_console()
     print(separador(33, 3))
     print("Cadastro da bike")
-    n_serie = input("Número de série:")
+    n_serie = input("Número de série (11 caracteres):")
+    n_serie_validado = validarNserie(n_serie)
     valor = input("Valor da bike: R$")
     cor = input("Cor: ")
     modelo = input("Modelo: ")
+    clear_console()
+    separador(33, 3)
+    print(f"1- Número de série: {n_serie_validado}\n2- Valor: {valor:.2f}\n3- Cor: {cor}\n4- Modelo: {modelo}")
+    mudanca = input("Se todas informações estiverem corretas digite 0\nSe não digite o número que deseja mudar: ")
+    while mudanca != "0":
+        if mudanca == "1":
+            n_serie = input("Número de série (11 caracteres): ")
+            n_serie_validado = validarNserie(n_serie)
+        
+        elif mudanca == "2":
+            valor = input("Valor: R$")
+        
+        elif mudanca == "3":
+            cor = input("Cor: ")
+
+        elif mudanca == "4":
+            modelo = input("Modelo: ")
+
+def validarNserie(n_serie):
+    while len(n_serie) != "11":
+        clear_console()
+        separador(33, 3)
+        separador("Opção inválida!", 6)
+        n_serie = input("Número de série (11 caracteres): ")
+    return n_serie
+
+
+def principal():
+    cadastroCliente()
+    bike()
 
 #Programa principal
-cadastroCliente()
+principal()
