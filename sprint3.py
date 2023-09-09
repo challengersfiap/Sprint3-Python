@@ -41,10 +41,18 @@ def clear_console():
     elif os.name == 'nt':
         os.system('cls')
 
+def validacao(v, tipo, nome, cpf_formatado, dt_nasc_formatada, tel_fixo, tel_celular, email):
+    if tipo == 1:
+        while v not in ["1", "2", "3", "4", "5", "6"]:
+            print(f"1- Nome: {nome}\n2- CPF: {cpf_formatado}\n3- Data de nascimento: {dt_nasc_formatada}\n4- Telefone fixo: {tel_fixo}\n5- Telefone celular: {tel_celular}\n6- Email: {email}")
+            v = input("Se todas informações estiverem corretas digite 0\nSe não digite o número que deseja mudar: ")
+
+        return v
+
 def cadastroCliente():
     clear_console()
     print(separador(33, 1))
-    nome = input("Digite seu nome completo: ")
+    nome = input("Digite seu nome completo: ").strip().title()
 
     cpf = input("Digite seu CPF: ").replace(".", "").replace("-", "").replace(" ", "")
     cpf_formatado = formatarCpf(cpf)
@@ -56,7 +64,37 @@ def cadastroCliente():
     email = input("Informe seu email: ")
     clear_console()
     print(separador(33,1))
-    print(f"Nome: {nome}\nCPF: {cpf_formatado}\nData de nascimento: {dt_nasc_formatada}")
+    clear_console()
+    print(separador(33,1 ))
+    print(f"1- Nome: {nome}\n2- CPF: {cpf_formatado}\n3- Data de nascimento: {dt_nasc_formatada}\n4- Telefone fixo: {tel_fixo}\n5- Telefone celular: {tel_celular}\n6- Email: {email}")
+    print(separador(33, 1))
+
+    mudanca = input("Se todas informações estiverem corretas digite 0\nSe não digite o número que deseja mudar: ")
+    while mudanca != "0":
+        if mudanca == "1":
+            nome = input("Nome: ").strip().title()
+
+        elif mudanca == "2":
+            cpf = input("CPF: ")
+            cpf_formatado = formatarCpf(cpf)
+
+        elif mudanca == "3":
+            dt_nasc = input("Data de nascimento: ")
+            dt_nasc_formatada = formatarData(dt_nasc)
+
+        elif mudanca == "4": 
+            tel_fixo = input("Telefone fixo: ")
+
+        elif mudanca == "5":
+            tel_celular = input("Celular: ")
+
+        elif mudanca == "6":
+            email = input("Email: ")
+        clear_console()
+        print(separador(33,1 ))
+        print(f"1- Nome: {nome}\n2- CPF: {cpf_formatado}\n3- Data de nascimento: {dt_nasc_formatada}\n4- Telefone fixo: {tel_fixo}\n5- Telefone celular: {tel_celular}\n6- Email: {email}")
+        print(separador(33, 1))
+        mudanca = input("Se todas informações estiverem corretas digite 0\nSe não digite o número que deseja mudar: ")
 
 def formatarCpf(cpf):
     while len(cpf) > 11 or len(cpf) < 11:
@@ -70,24 +108,24 @@ def formatarData(data):
             print(separador("Erro!", 6), end="")
             data = input(" Quantidades de caracteres diferente de 8!\nData de nascimento dd/mm/aaaa: ").replace("/", "").replace(" ", "")
             continue 
+
         data_atual = datetime.date.today()
         data_nascimento = datetime.date(int(data[4:]), int(data[2:4]), int(data[:2]))
         mes_nascimento = int(data[2:4])
         dia_nascimento = int(data[:2])
-        idade = data_atual.year - data_nascimento.year - ((data_atual.month, data_atual.day) < mes_nascimento, dia_nascimento)
-        while idade < 18 or idade > 100:
-            if idade < 18:
-                print(separador("Você é menor de idade!", 6))
-                data = input("Data de nascimento: ")
-            elif idade > 100:
-                print(separador("Você tem mais de 100 anos!", 6))
-                data = input("Data de nascimento: ")
-        if 18 <= idade <=100:
-            break
+        idade = data_atual.year - data_nascimento.year - ((data_atual.month, data_atual.day) < (mes_nascimento, dia_nascimento))
 
-    # return f'{data[:2]}/{data[2:4]}/{data[4:]}'
+        if 18 <= idade <= 100:
+            break 
 
+        if idade < 18:
+            print(separador("Você é menor de idade!", 6))
+        elif idade > 100:
+            print(separador("Você tem mais de 100 anos!", 6))
 
+        data = input("Data de nascimento: ")  # Recalcule a idade após a entrada da data
+
+    return f'{data[:2]}/{data[2:4]}/{data[4:]}'
 
 #Programa principal
 cadastroCliente()
