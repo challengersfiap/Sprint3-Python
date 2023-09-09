@@ -3,6 +3,8 @@
 # dados: Listas, Tuplas, Dicionários, Tabelas (listas + dicionários).
 import os
 import datetime
+import time
+import sys
 
 def separador(n, cor):
     limpa = '\033[0m'
@@ -12,7 +14,8 @@ def separador(n, cor):
         3: {'roxo' : '\033[95m' , 'limpa' : limpa},
         4: {'amarelo': '\033[33m', 'limpa': limpa},
         5: {'vermelho': '\033[31m', 'limpa': limpa},
-        6: {'Lvermelho': '\033[91m', 'limpa': limpa}
+        6: {'Lvermelho': '\033[91m', 'limpa': limpa},
+        7: {'Lverde': '\033[32m', 'limpa': limpa}
     }
 
     if cor == 1:
@@ -32,6 +35,9 @@ def separador(n, cor):
 
     elif cor == 6:
         mensagem = f'{cores[6]["Lvermelho"]}{n}{cores[6]["limpa"]}'
+
+    elif cor == 7:
+        mensagem = f'{cores[7]["Lverde"]}{n}{cores[7]["limpa"]}'
     
     return mensagem
 
@@ -96,6 +102,17 @@ def cadastroCliente():
         print(separador(33, 1))
         mudanca = input("Se todas informações estiverem corretas digite 0\nSe não digite o número que deseja mudar: ")
 
+    print("Validando dados", end="")
+    for c in range(3):
+        time.sleep(0.7)
+        print(".", end="")
+        sys.stdout.flush()
+    print("Dados aprovados!")
+    time.sleep(3)
+    infos = [nome, cpf_formatado, dt_nasc_formatada, tel_fixo, tel_celular, email]
+    return infos
+    
+
 def formatarCpf(cpf):
     while len(cpf) > 11 or len(cpf) < 11:
         print(separador("CPF inválido!", 6), end="")
@@ -126,6 +143,15 @@ def formatarData(data):
         data = input("Data de nascimento: ")  # Recalcule a idade após a entrada da data
 
     return f'{data[:2]}/{data[2:4]}/{data[4:]}'
+
+def bike():
+    clear_console()
+    print(separador(33, 3))
+    print("Cadastro da bike")
+    n_serie = input("Número de série:")
+    valor = input("Valor da bike: R$")
+    cor = input("Cor: ")
+    modelo = input("Modelo: ")
 
 #Programa principal
 cadastroCliente()
