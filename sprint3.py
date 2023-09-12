@@ -1,6 +1,3 @@
-# 1 – Considerando a Sprint 2 devidamente concluída, escolha e codifique ao menos 3 funcionalidades do menu, utilizando os
-# conceitos aprendidos: Funções/Procedimentos, passagem de parâmetros e retorno de funções / Manipulação de estruturas de 
-# dados: Listas, Tuplas, Dicionários, Tabelas (listas + dicionários).
 import os
 import datetime
 import time
