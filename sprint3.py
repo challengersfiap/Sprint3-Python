@@ -72,7 +72,7 @@ def validacao(v, tipo, var):
         return v
     
     elif tipo == 4:
-        while v not in ["1", "2", "3"]:
+        while v not in ["1", "2", "3", "4", "5", "6"]:
             clear_console()
             print(separador(33, 2))
             print(separador("Opção inválida!", 6))
@@ -276,18 +276,43 @@ def validarNserie(n_serie):
         n_serie = input("Número de série (11 caracteres): ")
     return n_serie
 
+def atendente():
+    pergunta = input("Você: ").lower()
+
+    if "cobertura" in pergunta:
+        return ""
+    
+    elif "preco" in pergunta or "custo" in pergunta or "valor" in pergunta:
+        return ""
+    
+    elif "como contratar" in pergunta or "como contratar" in pergunta:
+        return ""
+    
+    elif "forma de pagamento" in pergunta or "pagamento" in pergunta:
+        return ""
+    
+    elif "cancelar seguro" in pergunta or "cancelar" in pergunta:
+        return ""
+    
+    elif "sinistro" in pergunta:
+        return ""
+
+    else:
+        return "Desculpe, não entendi a pergunta. Por favor, faça uma pergunta mais específica."
+
 
 def principal():
     option = ""
     clear_console()
     print(separador(33, 2))
     while option != "6":
-        option = input("1- Fazer seguro de bike\n2- Saber sobre o seguro de bike\n3- Termos de privacidade e segurança3\n6- Sair\n")
+        option = input("1- Fazer seguro de bike\n2- Saber sobre o seguro de bike\n3- Termos de privacidade e segurança\n4- Suporte\n6- Sair\n")
         option = validacao(option, 4, var="")
         if option == "1":
             cadastroCliente()
             bike()
             simulacaoVistoria()
+            option = "6"
 
         elif option == "2":
             clear_console()
@@ -301,16 +326,11 @@ def principal():
             url = "https://www.portoseguro.com.br/conteudo/mobile/portoseguro/politica-de-privacidade.html"
             webbrowser.open(url)
 
-
         elif option == "4":
             clear_console()
             print(separador(33, 4))
+            print("Bem vindo ao atendimento da Porto Seguro!")
+            atendente()
             
-
-    
-    
-
-
-
 #Programa principal
 principal()
