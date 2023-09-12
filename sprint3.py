@@ -2,6 +2,7 @@ import os
 import datetime
 import time
 import sys
+import webbrowser
 
 def separador(n, cor):
     limpa = '\033[0m'
@@ -277,19 +278,38 @@ def validarNserie(n_serie):
 
 
 def principal():
+    option = ""
     clear_console()
     print(separador(33, 2))
-    option = input("1- Fazer seguro de bike\n2- Saber sobre o seguro de bike\n3- Sair\n")
-    option = validacao(option, 4, var="")
-    if option == "1":
-        cadastroCliente()
-        bike()
-        simulacaoVistoria()
-    elif option == "2":
-        clear_console()
-        print(separador(33, 2))
-        print("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed non risus. Suspendisse lectus tortor, dignissim sit amet, adipiscing nec, ultricies sed, dolor. Cras elementum ultrices diam. Maecenas ligula massa, varius a, semper congue, euismod non, mi. Proin porttitor, orci nec nonummy molestie, enim est eleifend mi, non fermentum diam nisl sit amet erat. Duis semper. Duis arcu massa, scelerisque vitae, consequat in, pretium a, enim. Pellentesque congue. Ut in risus volutpat libero pharetra tempor. Cras vestibulum bibendum augue. Praesent egestas leo in pede. Praesent blandit odio eu enim. Pellentesque sed dui ut augue blandit sodales. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Aliquam nibh. Mauris ac mauris sed pede pellentesque fermentum. Maecenas adipiscing ante non diam sodales hendrerit.")
-        print(separador(33, 2))
+    while option != "6":
+        option = input("1- Fazer seguro de bike\n2- Saber sobre o seguro de bike\n3- Termos de privacidade e segurança3\n6- Sair\n")
+        option = validacao(option, 4, var="")
+        if option == "1":
+            cadastroCliente()
+            bike()
+            simulacaoVistoria()
+
+        elif option == "2":
+            clear_console()
+            print(separador(33, 2))
+            print("Bem-vindo ao nosso Seguro de Bicicleta, uma maneira simples e segura de proteger sua bicicleta contra imprevistos. Na Porto Seguro, compreendemos o valor que sua bicicleta tem para você, seja para o lazer ou para deslocamentos diários. Com nosso seguro de bicicleta, você pode pedalar com tranquilidade, sabendo que está protegido.\n\nPor que escolher o Seguro de Bicicleta da Porto Seguro:\n\n- Cobertura Abrangente: Nosso seguro oferece cobertura contra roubo, furto qualificado e danos acidentais à sua bicicleta.\n- Ampla Rede de Oficinas Parceiras: Trabalhamos com uma ampla rede de oficinas especializadas para garantir o melhor atendimento em caso de reparos.\n- Cobertura em Todo o Brasil: Esteja você pedalando na cidade ou explorando trilhas, nosso seguro oferece cobertura em todo o território nacional.\n- Facilidade de Contratação: Você pode adquirir seu seguro de bicicleta de forma rápida e descomplicada, diretamente pelo aplicativo.")
+            print(separador(33, 2))
+
+        elif option == "3":
+            clear_console()
+            print(separador(33, 4))
+            url = "https://www.portoseguro.com.br/conteudo/mobile/portoseguro/politica-de-privacidade.html"
+            webbrowser.open(url)
+
+
+        elif option == "4":
+            clear_console()
+            print(separador(33, 4))
+            
+
+    
+    
+
 
 
 #Programa principal
