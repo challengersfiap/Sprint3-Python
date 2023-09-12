@@ -42,18 +42,15 @@ def separador(n, cor):
     return mensagem
 
 def clear_console():
-    if os.name == 'posix':
-        os.system('clear')
-    elif os.name == 'nt':
-        os.system('cls')
+    os.system('cls' if os.name == 'nt' else 'clear')
 
-def validacao(v, tipo, nome, cpf_formatado, dt_nasc_formatada, tel_fixo, tel_celular, email):
+def validacao(v, tipo, var):
     if tipo == 1:
-        while v not in ["1", "2", "3", "4", "5", "6"]:
+        while v not in ["0", "1", "2", "3", "4", "5", "6"]:
             clear_console()
             print(separador(33, 1))
             print(separador("Opção inválida!", 6))
-            print(f"1- Nome: {nome}\n2- CPF: {cpf_formatado}\n3- Data de nascimento: {dt_nasc_formatada}\n4- Telefone fixo: {tel_fixo}\n5- Telefone celular: {tel_celular}\n6- Email: {email}")
+            print(f"1- Nome: {var[0]}\n2- CPF: {var[1]}\n3- Data de nascimento: {var[2]}\n4- Telefone fixo: {var[2]}\n5- Telefone celular: {var[4]}\n6- Email: {var[5]}")
             print(separador(33, 1))
             v = input("Se todas informações estiverem corretas digite 0\nSe não digite o número que deseja mudar: ")
         return v
@@ -66,6 +63,39 @@ def validacao(v, tipo, nome, cpf_formatado, dt_nasc_formatada, tel_fixo, tel_cel
             v = input("1- Fazer seguro de bike!\n2- Saber informações do seguro\n3- Sair").strip()        
         return v
 
+    elif tipo == 3:
+        while v not in ["0", "1", "2", "3", "4"]:
+            clear_console()
+            print(separador(33,3))
+            print(separador("Opção inválida!", 6))
+            print(f"1- Número de série: {var[0]}\n2- Valor: R${var[1]:,.2f}\n3- Cor: {var[2]}\n4- Modelo: {var[3]}")
+            print(separador(33, 3))
+            v = input("Se todas informações estiverem corretas digite 0\nSe não digite o número que deseja mudar: ")
+        return v
+    
+    elif tipo == 4:
+        while v not in ["1", "2", "3"]:
+            clear_console()
+            print(separador(33, 2))
+            print(separador("Opção inválida!", 6))
+            v = input("1- Fazer seguro de bike\n2- Saber sobre o seguro de bike\n3- Sair\n")
+        return v
+    
+    elif tipo == 5:
+        while v not in ["S", "N"]:
+            clear_console()
+            print(separador(33, 2))
+            print(separador("Opção inválida!", 6))
+            v = input("A bike possui algum dano estético?[S/N] ").strip().upper()
+        return v
+    
+    elif tipo == 6:
+        while v not in ["S", "N"]:
+            clear_console()
+            print(separador(33, 2))
+            print(separador("Opção inválida!", 6))
+            v = input("A bike possui algum dano que afete o funcionamento? [S/N] ").replace(" ", "").upper()
+        return v
 def menuPrincipal():
     print(separador(33, 4))
     option = input("1- Fazer seguro de bike!\n2- Saber informações do seguro\n3- Sair").strip()
@@ -73,6 +103,7 @@ def menuPrincipal():
     return option
 
 def cadastroCliente():
+    dados = []
     clear_console()
     print(separador(33, 1))
     nome = input("Digite seu nome completo: ").strip().title()
@@ -85,52 +116,119 @@ def cadastroCliente():
     tel_fixo = input("Telefone fixo(opcional): ")
     tel_celular = input("Celular(opcional): ")
     email = input("Informe seu email: ")
+
+    addLista(dados, nome, cpf_formatado, dt_nasc_formatada, tel_fixo, tel_celular, email)
+
     clear_console()
     print(separador(33,1))
     clear_console()
     print(separador(33,1 ))
-    print(f"1- Nome: {nome}\n2- CPF: {cpf_formatado}\n3- Data de nascimento: {dt_nasc_formatada}\n4- Telefone fixo: {tel_fixo}\n5- Telefone celular: {tel_celular}\n6- Email: {email}")
+    print(f"1- Nome: {dados[0]}\n2- CPF: {dados[1]}\n3- Data de nascimento: {dados[2]}\n4- Telefone fixo: {dados[3]}\n5- Telefone celular: {dados[4]}\n6- Email: {dados[5]}")
     print(separador(33, 1))
 
     mudanca = input("Se todas informações estiverem corretas digite 0\nSe não digite o número que deseja mudar: ")
-    validacao(mudanca, 1, nome, cpf_formatado, dt_nasc_formatada, tel_fixo, tel_celular, email)
     while mudanca != "0":
+        mudanca = validacao(mudanca, 1, dados)
         if mudanca == "1":
-            nome = input("Nome: ").strip().title()
+            dados[0] = input("Nome: ").strip().title()
 
         elif mudanca == "2":
             cpf = input("CPF: ")
-            cpf_formatado = formatarCpf(cpf)
+            dados[1] = formatarCpf(cpf)
 
         elif mudanca == "3":
             dt_nasc = input("Data de nascimento: ")
-            dt_nasc_formatada = formatarData(dt_nasc)
+            dados[2] = formatarData(dt_nasc)
 
         elif mudanca == "4": 
-            tel_fixo = input("Telefone fixo: ")
+            dados[3] = input("Telefone fixo: ")
 
         elif mudanca == "5":
-            tel_celular = input("Celular: ")
+            dados[4] = input("Celular: ")
 
         elif mudanca == "6":
-            email = input("Email: ")
+            dados[5] = input("Email: ")
+
         clear_console()
         print(separador(33,1 ))
-        print(f"1- Nome: {nome}\n2- CPF: {cpf_formatado}\n3- Data de nascimento: {dt_nasc_formatada}\n4- Telefone fixo: {tel_fixo}\n5- Telefone celular: {tel_celular}\n6- Email: {email}")
+        print(f"1- Nome: {dados[0]}\n2- CPF: {dados[1]}\n3- Data de nascimento: {dados[2]}\n4- Telefone fixo: {dados[3]}\n5- Telefone celular: {dados[4]}\n6- Email: {dados[5]}")
         print(separador(33, 1))
         mudanca = input("Se todas informações estiverem corretas digite 0\nSe não digite o número que deseja mudar: ")
-        validacao(mudanca, 1, nome, cpf_formatado, dt_nasc_formatada, tel_fixo, tel_celular, email)
+        validacao(mudanca, 1, dados)
 
     print("Validando dados", end="")
     for c in range(3):
         time.sleep(0.7)
         print(".", end="")
         sys.stdout.flush()
-    print("Dados aprovados!")
+    print("\n\x1b[32mDados aprovados!\x1b[0m")
     time.sleep(3)
-    infos = [nome, cpf_formatado, dt_nasc_formatada, tel_fixo, tel_celular, email]
-    return infos
+    return dados
     
+def bike():
+    dados = []
+    clear_console()
+    print(separador(33, 3))
+    print("Cadastro da bike!")
+    n_serie = input("Número de série (11 caracteres):")
+    n_serie_validado = validarNserie(n_serie)
+    valor = validaValor()
+    cor = input("Cor: ")
+    modelo = input("Modelo: ")
+
+    addLista(dados, n_serie_validado, valor, cor, modelo)
+
+    clear_console()
+    print(separador(33, 3))
+    print(f"1- Número de série: {dados[0]}\n2- Valor: R${dados[1]:,.2f}\n3- Cor: {dados[2]}\n4- Modelo: {dados[3]}")
+    print(separador(33, 3))
+    mudanca = input("Se todas informações estiverem corretas digite 0\nSe não digite o número que deseja mudar: ")
+    while mudanca != "0":
+        mudanca = validacao(mudanca, 3, dados)
+        if mudanca == "1":
+            n_serie = input("Número de série (11 caracteres): ")
+            dados[0] = validarNserie(n_serie)
+            # dados[0] = n_serie_validado
+        
+        elif mudanca == "2":
+            dados[1] = validaValor()
+        
+        elif mudanca == "3":
+            dados[2] = input("Cor: ")
+
+        elif mudanca == "4":
+            dados[3] = input("Modelo: ")
+        
+        clear_console()
+        print(separador(33, 3))
+        print(f"1- Número de série: {dados[0]}\n2- Valor: R${dados[1]:,.2f}\n3- Cor: {dados[2]}\n4- Modelo: {dados[3]}")
+        print(separador(33, 3))
+        mudanca = input("Se todas informações estiverem corretas digite 0\nSe não digite o número que deseja mudar: ")
+
+def simulacaoVistoria():
+    clear_console()
+    print(separador(33, 2))
+    bike_dano = input("A bike possui algum dano que afete o funcionamento? [S/N] ").strip().upper()
+    bike_dano = validacao(bike_dano, 5, var="")
+    if bike_dano[0] == "S":
+        dano = input("Informe o dano existente na bike: ")
+
+    bike_dano_estetico = input("A bike possui algum dano estético? [S/N] ").replace(" ", "").upper()
+    bike_dano_estetico = validacao(bike_dano_estetico, 6, var="")
+
+    if bike_dano_estetico[0] == "S":
+        dano = input("Informe o dano existente na bike: ")
+        print("O seguro da bike foi aprovado, porém não cobriremos esse dano!")
+        print(separador(33, 2))
+            
+    elif bike_dano_estetico[0] == "N":
+        print("Seguro da bike foi aprovado!")
+        print(separador(33, 2))
+
+
+def addLista(lista, *var):
+    for c in var:
+        lista.append(c)
 
 def formatarCpf(cpf):
     while len(cpf) > 11 or len(cpf) < 11:
@@ -163,45 +261,38 @@ def formatarData(data):
 
     return f'{data[:2]}/{data[2:4]}/{data[4:]}'
 
-def bike():
-    clear_console()
-    print(separador(33, 3))
-    print("Cadastro da bike")
-    n_serie = input("Número de série (11 caracteres):")
-    n_serie_validado = validarNserie(n_serie)
-    valor = input("Valor da bike: R$")
-    cor = input("Cor: ")
-    modelo = input("Modelo: ")
-    clear_console()
-    separador(33, 3)
-    print(f"1- Número de série: {n_serie_validado}\n2- Valor: {valor:.2f}\n3- Cor: {cor}\n4- Modelo: {modelo}")
-    mudanca = input("Se todas informações estiverem corretas digite 0\nSe não digite o número que deseja mudar: ")
-    while mudanca != "0":
-        if mudanca == "1":
-            n_serie = input("Número de série (11 caracteres): ")
-            n_serie_validado = validarNserie(n_serie)
-        
-        elif mudanca == "2":
-            valor = input("Valor: R$")
-        
-        elif mudanca == "3":
-            cor = input("Cor: ")
-
-        elif mudanca == "4":
-            modelo = input("Modelo: ")
+def validaValor():
+    while True:
+        valor = input("Valor da bike: R$").strip().replace(",", ".")
+        try:
+            valor_float = float(valor)
+            return valor_float
+        except ValueError:
+            print(separador("Digite um valor válido.", 6))
 
 def validarNserie(n_serie):
-    while len(n_serie) != "11":
+    while len(n_serie) != 11:
         clear_console()
-        separador(33, 3)
-        separador("Opção inválida!", 6)
+        print(separador(33, 3))
+        print(separador("Opção inválida!", 6))
         n_serie = input("Número de série (11 caracteres): ")
     return n_serie
 
 
 def principal():
-    cadastroCliente()
-    bike()
+    clear_console()
+    print(separador(33, 2))
+    option = input("1- Fazer seguro de bike\n2- Saber sobre o seguro de bike\n3- Sair\n")
+    option = validacao(option, 4, var="")
+    if option == "1":
+        cadastroCliente()
+        bike()
+        simulacaoVistoria()
+    elif option == "2":
+        clear_console()
+        print(separador(33, 2))
+        print("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed non risus. Suspendisse lectus tortor, dignissim sit amet, adipiscing nec, ultricies sed, dolor. Cras elementum ultrices diam. Maecenas ligula massa, varius a, semper congue, euismod non, mi. Proin porttitor, orci nec nonummy molestie, enim est eleifend mi, non fermentum diam nisl sit amet erat. Duis semper. Duis arcu massa, scelerisque vitae, consequat in, pretium a, enim. Pellentesque congue. Ut in risus volutpat libero pharetra tempor. Cras vestibulum bibendum augue. Praesent egestas leo in pede. Praesent blandit odio eu enim. Pellentesque sed dui ut augue blandit sodales. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Aliquam nibh. Mauris ac mauris sed pede pellentesque fermentum. Maecenas adipiscing ante non diam sodales hendrerit.")
+        print(separador(33, 2))
 
 #Programa principal
 principal()
