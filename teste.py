@@ -37,3 +37,21 @@ atual = datetime.date.today()
 print(atual)
 print(atual.year)
 print(atual.strftime("%A"))
+
+print("\x1b[32mTexto em verde\x1b[0m")
+
+valor = 12345.67
+valor_formatado = f"${valor:,.2f}"
+print(valor_formatado)
+
+minha_lista = []
+
+var1 = "valor1"
+var2 = 42
+var3 = ["a", "b", "c"]
+
+minha_lista.extend([var1, var2, var3])
+# ou
+minha_lista += [var1, var2, var3]
+
+print(minha_lista)
