@@ -1,0 +1,58 @@
+-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+Nome da equipe: Bike Vision
+-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+André Rohregger Machado RM:98110
+
+Caio da Silva Martins RM:551563
+
+Gabriel Siqueira Rodrigues RM:98626
+
+Gustavo de Oliveira Azevedo RM:550548
+
+Mateus Mantovani Araújo RM:98524
+-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+Solução proposta: O código apresentado representa uma solução simplificada para um sistema de seguro de bicicleta. O objetivo deste projeto é oferecer aos usuários a possibilidade de contratar um seguro para suas bicicletas, com processo de vistoria acontecendo em tempo real e com uma resposta muito rápida de reconhecimento de imagem.
+-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+Sumário / Escopo:
+
+-Título: Reconhecimento de imagem web
+-Objetivo: Este projeto foi desenvolvido para criar um sistema de seguro de bicicleta simplificado usando Python. O objetivo é permitir que os usuários cadastrem suas informações, cadastrem detalhes de suas bicicletas, simulem uma vistoria de seguro e interajam com um atendente virtual para obter informações sobre o seguro de bicicleta.
+
+-Tecnologia: Python 3.11.4
+-Bibliotecas utilizadas: -os
+			 -datetime
+			 -time
+			 -sys
+			 -webbrowser
+
+-Estrutura de diretórios: Computational Thinking Using Python/
+			  ├── Img java/
+			  │   ├──10 imagens.png
+			  └── main.py
+			  
+			
+-Requisitos do sistema: - Python 3.x
+                        - Sistema operacional compatível com os comandos 'cls' (Windows) ou 'clear' (Linux/Unix)
+                        - Módulo 'webbrowser' para abrir URLs externas no navegador.
+
+-Execução do projeto: Para executar o projeto, siga estas etapas:
+                      1. Abra um terminal ou prompt de comando.
+                      2. Navegue até o diretório onde o arquivo Python está localizado.
+                      3. Execute o arquivo Python com o comando 'python nome_do_arquivo.py'.
+
+-Funcionalidade principais: 1. Cadastro de Cliente: Os usuários podem inserir suas informações pessoais, como nome, CPF, data de nascimento, telefones e e-mail.
+		            2. Cadastro de Bicicleta: Os usuários podem registrar informações sobre suas bicicletas, como número de série, valor, cor e modelo.
+                            3. Simulação de Vistoria: O sistema permite que os usuários simulem uma vistoria de seguro e avaliem se há danos na bicicleta.
+                            4. Atendente Virtual: Os usuários podem interagir com um atendente virtual para obter informações sobre cobertura, preço, contratação, cancelamento e pagamento do seguro de bicicleta.
+
+-Cronograma: Após essa entrega da Sprint 3, o programa estará finalizado no dia 28/10
+
+-Equipe:André Rohregger Machado, Caio da Silva Martins, Gabriel Siqueira Rodrigues, Gustavo de Oliveira Azevedo, Mateus Mantovani Araújo
+
+-Contato: gabrielrodri333@gmail.com
+	  https://www.linkedin.com/in/gabrielrodri/
+	  https://www.instagram.com/gabrielrodri33/
+
+-Observações: Já temos o software de reconhecimento de imagem funcionando, porém ainda não chegamos em uma parte da matéria que permita-nos integrar isso.
+-Última atualização: 12/09/2023
+-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
